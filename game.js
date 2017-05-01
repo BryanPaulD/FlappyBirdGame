@@ -83,8 +83,6 @@ function Cactus()
 
         if (this.x <= (theBird.x + theBird.width) && this.x >= theBird.x && theBird.y <= 95) 
         {
-            console.log("The cactus's x-position is : " + this.x + " The bird's y-position is : " + theBird.y);
-            console.log("You are now deceased.");
             currentState = states.score;
             rowOneText.innerText = "Score: _ High score: _ ";
             textAndButtonContainer.appendChild(rowTwoText);
@@ -92,8 +90,6 @@ function Cactus()
         }
         if (this.x <= (theBird.x + theBird.width) && this.x >= theBird.x && theBird.y >= 185)
         {
-            console.log("The cactus's x-position is : " + this.x + " The bird's y-position is : " + theBird.y);
-            console.log("You are now deceased.");
             currentState = states.score;
             rowOneText.innerText = "Score: _ High score: _ ";
             textAndButtonContainer.appendChild(rowTwoText);
@@ -115,8 +111,6 @@ function Cactus()
     // // Determine intersection
     // if (r > d1 || r > d2)
     // {
-    //     console.log("The cactus's x-position is : " + this.x + " The bird's y-position is : " + theBird.y);
-    //     console.log("You are now deceased.");
     //     currentState = states.score;
     // }
 
@@ -191,9 +185,6 @@ function UserGuy()
         {
             this.y = this.ground;
             this.velocity = this._jump;
-
-            console.log("The bird's y-position is : " + theBird.y);
-            console.log("You are now deceased.");
             currentState = states.score;
             rowOneText.innerText = "Score: _ High score: _ ";
             textAndButtonContainer.appendChild(rowTwoText);
