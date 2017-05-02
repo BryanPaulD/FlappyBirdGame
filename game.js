@@ -270,13 +270,19 @@ function executeJS()
     theButton.setAttribute("type", "button");
     theButton.setAttribute("value", "Play again");
     // theButton.onclick = resetGame();
-
+    theButton.onclick = buttonTest(); //If you look at the console, you'll see that the button onclick gets called every time the page refreshes, instead of whenever the button is clicked. This is obviously a problem.
+    
     //I don't append theButton here.
     
     loadGraphics();
     theBird = new UserGuy();
 
     theCacti = new CactusGroup();
+}
+
+function buttonTest()
+{
+    console.log("Does the button work?"); //Just tesing to see when the button onclick gets called.
 }
 
 function setUpWindow()
