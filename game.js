@@ -327,9 +327,11 @@ function resetGame()
 {
     currentState = states.splash;
     theCacti.reset();
-    textAndButtonContainer.innerHTML = rowOneText;
     rowOneText.innerText = "Click to play";
+    textAndButtonContainer.removeChild(rowTwoText);
+    textAndButtonContainer.removeChild(theButton);
     theBird.y = 130;
+    theScore = 0;
 }
 
 function loadGraphics()
