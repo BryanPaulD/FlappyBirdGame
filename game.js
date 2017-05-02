@@ -10,7 +10,7 @@ var currentState,
     rowTwoText,
     theButton,
     
-    theScore;
+    theScore = 0;
 
 var states = {
     splash: 0,
@@ -79,19 +79,23 @@ function Cactus()
     this.width = topMediumCactusSprite.width;
     this.height = topMediumCactusSprite.height;
 
+    this.scored = false;
+    
     this.detectCollision = function() {
 
         if (this.x <= (theBird.x + theBird.width) && this.x >= theBird.x && theBird.y <= 95) 
         {
             currentState = states.score;
-            rowOneText.innerText = "Score: _ High score: _ ";
+            checkHighScore();
+            rowOneText.innerText = "Score: " + theScore + "   High score: localStorage.getItem("highScore") + " ";
             textAndButtonContainer.appendChild(rowTwoText);
             textAndButtonContainer.appendChild(theButton);
         }
         if (this.x <= (theBird.x + theBird.width) && this.x >= theBird.x && theBird.y >= 185)
         {
             currentState = states.score;
-            rowOneText.innerText = "Score: _ High score: _ ";
+            checkHighScore();
+            rowOneText.innerText = "Score: " + theScore + "   High score: localStorage.getItem("highScore") + " ";
             textAndButtonContainer.appendChild(rowTwoText);
             textAndButtonContainer.appendChild(theButton);
         }
@@ -121,9 +125,12 @@ function Cactus()
     }
 
     this.checkScore = function() {
-        if(this.x + this.width < theBird.x) //If the bird passes the right edge of the cactus
+        if((this.x + this.width) < 150 && !this.scored) //If the bird passes the right edge of the cactus
         {
             theScore++;
+            this.scored = true;
+            rowOneText.innerText = "Score: " + theScore;
+            
             console.log("Score: " + theScore);
         }
     }
@@ -186,7 +193,8 @@ function UserGuy()
             this.y = this.ground;
             this.velocity = this._jump;
             currentState = states.score;
-            rowOneText.innerText = "Score: _ High score: _ ";
+            checkHighScore();
+            rowOneText.innerText = "Score: " + theScore + "   High score: localStorage.getItem("highScore") + " ";
             textAndButtonContainer.appendChild(rowTwoText);
             textAndButtonContainer.appendChild(theButton);
         }
@@ -298,6 +306,21 @@ function setUpCanvas()
     canvas.width = width;
     canvas.height = height;
     renderingContext = canvas.getContext("2d");
+}
+
+
+
+
+function checkHighScore()
+{
+    // Check browser support
+    if (typeof(Storage) !== "undefined" && theScore > localStorage.getItem("highScore"))
+    {
+        // Store
+        localStorage.setItem("highScore", theScore);
+        // Retrieve
+        console.log(localStorage.getItem("highScore"));
+    }
 }
 
 function resetGame()
